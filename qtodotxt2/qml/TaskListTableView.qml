@@ -22,6 +22,7 @@ TableView {
 //        selection.select(currentRow, currentRow)
     }
     property int lastIndex: 0
+    property var lastTask: 0
     property bool editing: (currentItem !== null ? currentItem.state === "edit" : false)
     onEditingChanged: console.log("editing", editing)
 
@@ -86,17 +87,25 @@ TableView {
     }
 
     function storeSelection() {
-//        console.log("storing selection")
         lastIndex = currentRow
+		lastTask = mainController.filteredTasks[currentRow]
+		//console.log("storing selection", lastIndex, lastTask)
     }
 
     function restoreSelection() {
-//        console.log("restoring selection", lastIndex)
+        //console.log("restoring selection")
+        for (var i = taskListView.rowCount - 1; i >= 0; i--) {
+            if (mainController.filteredTasks[i] === lastTask) {
+                console.log("found last task", i, mainController.filteredTasks[i])
+                lastIndex = i
+                break
+            }
+        }
+
         currentRow = Math.min(lastIndex, taskListView.rowCount - 1)
         selection.clear()
         selection.select(currentRow)
     }
-
 
     function getSelectedIndexes() {
         var indexes = []
@@ -176,6 +185,16 @@ TableView {
             }
             onInputAccepted: {
                 taskList[styleData.row].text = newText
+                taskList[styleData.row].is_new = false
+            }
+            onInputDiscarded: {
+                if (taskList[styleData.row].is_new === true) {
+                    console.log("Discarding newly created task. Deleting it.")
+		            taskListView.storeSelection()
+		            console.log("deleting task ", styleData.row)
+		            mainController.deleteTasks([styleData.row])
+		            taskListView.restoreSelection()
+                }
             }
             //Component.onCompleted: task = taskList[styleData.row]
             task: taskList[styleData.row]

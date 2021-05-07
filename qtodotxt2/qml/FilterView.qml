@@ -15,7 +15,7 @@ TreeView {
     selection: ItemSelectionModel {
         model: mainController.filtersModel
         onSelectedIndexesChanged: {
-//            console.log(selectedIndexes)
+            console.log(selectedIndexes)
             taskListView.storeSelection()
             mainController.filterByIndexes(selectedIndexes)
             taskListView.restoreSelection()

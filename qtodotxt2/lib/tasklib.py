@@ -1,4 +1,5 @@
 from datetime import datetime, date, time, MAXYEAR, timedelta
+from dateutil.relativedelta import relativedelta
 import re
 from enum import Enum
 
@@ -67,6 +68,7 @@ class Task(QtCore.QObject):
         QtCore.QObject.__init__(self)
         self._settings = QtCore.QSettings()
         self._highest_priority = 'A'
+        self._is_new = False
         # all other class attributes are defined in _reset method
         # which is called in _parse
         self._parse(text)
@@ -153,6 +155,14 @@ class Task(QtCore.QObject):
     def text(self, txt):
         self._parse(txt)
         self.modified.emit(self)
+
+    @QtCore.pyqtProperty(bool)
+    def is_new(self):
+        return self._is_new
+
+    @is_new.setter
+    def is_new(self, val):
+        self._is_new = val
 
     @QtCore.pyqtProperty('QString', notify=modified)
     def html(self):
@@ -391,9 +401,11 @@ def recurTask(task):
     elif task.recursion.interval == 'w':
         delta = timedelta(weeks=int(task.recursion.increment))
     elif task.recursion.interval == 'm':
-        delta = timedelta(weeks=int(task.recursion.increment) * 4)  # 4 weeks in a month
+        #delta = timedelta(weeks=int(task.recursion.increment) * 4)  # 4 weeks in a month
+        delta = relativedelta(months=+1)
     elif task.recursion.interval == 'y':
-        delta = timedelta(weeks=int(task.recursion.increment) * 52)  # 52 weeks in a year
+        #delta = timedelta(weeks=int(task.recursion.increment) * 52)  # 52 weeks in a year
+        delta = relativedelta(years=+1)
     else:
         # Test already made during line parsing - shouldn't be a problem here
         pass

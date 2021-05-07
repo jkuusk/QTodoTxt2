@@ -18,6 +18,7 @@ Loader {
         if (!current) state = "show"
     }
     signal inputAccepted(string newText)
+    signal inputDiscarded()
     onInputAccepted: state = "show"
 
     state: "show"
@@ -63,6 +64,7 @@ Loader {
             Keys.onEscapePressed: {
                 discard = true
                 taskLine.state = "show"
+                taskLine.inputDiscarded()
             }
 
             CompletionPopup { }

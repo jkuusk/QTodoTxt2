@@ -3,6 +3,7 @@ import os
 import string
 
 from PyQt5 import QtCore
+from PyQt5.QtCore import QModelIndex
 
 from qtodotxt2.lib import tasklib
 from qtodotxt2.lib.file import File
@@ -65,6 +66,7 @@ class MainController(QtCore.QObject):
     @QtCore.pyqtSlot('QString', 'int', result='int')
     def newTask(self, text='', after=None):
         task = tasklib.Task(text)
+        task.is_new = True
         if bool(self._settings.value("Preferences/add_creation_date", False, type=bool)):
             task.addCreationDate()
         if after is None:
@@ -80,6 +82,7 @@ class MainController(QtCore.QObject):
     @QtCore.pyqtSlot('QModelIndexList')
     @QtCore.pyqtSlot('QVariantList')
     def deleteTasks(self, tasks):
+        #print("got tasks for deletion: ", tasks)
         new_tasks = []
         for task in tasks:
             if isinstance(task, tasklib.Task):
@@ -88,6 +91,7 @@ class MainController(QtCore.QObject):
                 t = self._filteredTasks[int(task)]
             new_tasks.append(t)
         for task in new_tasks:
+            #print("deleting task ", task)
             self._file.deleteTask(task)
 
     @property

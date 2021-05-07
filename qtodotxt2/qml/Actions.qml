@@ -303,6 +303,15 @@ Item {
         }
     }
 
+    property Action clearSearch: Action{
+        iconName: "edit-clear"
+        text: "Clear Search"
+        enabled: !taskListView.editing
+        onTriggered: {
+            searchField.text = ""
+        }
+    }
+
     FileDialog {
         id: fileDialog
         nameFilters: ["Text files (*.txt)"]

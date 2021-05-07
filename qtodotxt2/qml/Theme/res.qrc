@@ -28,6 +28,8 @@
         <file>resources/white/link.png</file>
         <file>resources/white/qtodotxt.png</file>
         <file>resources/white/show_completed.png</file>
+        <file>resources/white/show_hidden.png</file>
+        <file>resources/white/edit-clear.png</file>
         <file>resources/white/sidepane.png</file>
         <file>resources/white/TaskComplete.png</file>
         <file>resources/white/TaskCopy.png</file>

@@ -129,19 +129,28 @@ ApplicationWindow {
             Layout.minimumWidth: 50
             Layout.fillWidth: true
 
+			RowLayout {
+	            TextField {
+	                id: searchField
+	
+                    signal inputDiscarded()
 
-            TextField {
-                id: searchField
+	                Layout.fillWidth: true
+	
+	                visible: actions.showSearchAction.checked
 
-                Layout.fillWidth: true
-
-                visible: actions.showSearchAction.checked
-
-                placeholderText: "Search"
-                onTextChanged: {
-                    mainController.searchText = text
-                    searchField.focus = true
+                    Keys.onEscapePressed: {
+                        searchField.text = ""
+                    }
+	
+	                placeholderText: "Search"
+	                onTextChanged: {
+	                    mainController.searchText = text
+	                    searchField.focus = true
+					}
                 }
+
+				ToolButton { action: actions.clearSearch}
 
                 CompletionPopup { }
             }

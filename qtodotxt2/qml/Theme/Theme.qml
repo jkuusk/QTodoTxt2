@@ -33,6 +33,8 @@ QtObject {
         "search": "ActionSearch.png",
         "view-filter": "sidepane.png",
         "show-completed": "show_completed.png", //FIXME search default icon-name
+        "show-hidden": "show_hidden.png", //FIXME search default icon-name
+        "edit-clear": "edit-clear.png", //FIXME search default icon-name
         "future": "future.png", //FIXME search default icon-name
         "archive": "archive.png", //FIXME search default icon-name
         "addLink": "link.png", //FIXME search default icon-name

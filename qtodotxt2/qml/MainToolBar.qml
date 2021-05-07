@@ -8,6 +8,8 @@ ToolBar {
             ToolButton { action: actions.showSearchAction}
             ToolButton { action: actions.showFilterPanel}
             ToolButton { action: actions.showCompleted}
+            ToolButton { action: actions.showFuture}
+            ToolButton { action: actions.showHidden}
             ToolBarSeparator { }
             ToolButton { action: actions.fileSave }
             ToolBarSeparator { }
@@ -23,6 +25,11 @@ ToolBar {
             ToolButton { action: actions.archive}
             ToolBarSeparator { }
             ToolButton { action: actions.addLink}
+            ToolBarSeparator { }
+            ToolButton { action: actions.sortDefault}
+            ToolButton { action: actions.sortByProjects}
+            ToolButton { action: actions.sortByContexts}
+            ToolButton { action: actions.sortByDueDate}
             Item { Layout.fillWidth: true }
         }
     }

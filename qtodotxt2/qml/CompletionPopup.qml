@@ -98,7 +98,12 @@ Item {
                     popup.textItem.remove(popup.textItem.cursorPosition
                                           - completionModel.prefix.length,
                                           popup.textItem.cursorPosition)
-                popup.textItem.insert(popup.textItem.cursorPosition, selectedText + " ")
+
+                // don't add space after due: and t: and rec:
+                var space = " "
+                if (selectedText == "due:" || selectedText == "t:" || selectedText == "rec:")
+                    space = ""
+                popup.textItem.insert(popup.textItem.cursorPosition, selectedText + space)
                 completionModel.clear()
                 if (completionModel.calendarKeywords.indexOf(selectedText) >= 0) state = "calendar"
             }
