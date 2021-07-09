@@ -67,6 +67,8 @@ class MainController(QtCore.QObject):
     def newTask(self, text='', after=None):
         task = tasklib.Task(text)
         task.is_new = True
+        if self._settings.value("Preferences/default_priority") != "":
+            task.addDefaultPriority()
         if bool(self._settings.value("Preferences/add_creation_date", False, type=bool)):
             task.addCreationDate()
         if after is None:

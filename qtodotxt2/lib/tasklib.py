@@ -73,10 +73,6 @@ class Task(QtCore.QObject):
         # which is called in _parse
         self._parse(text)
 
-    def addCreationCate(self):
-        self._removeCreationDate()
-        self._addCreationDate()
-
     def __str__(self):
         return self._text
 
@@ -97,6 +93,10 @@ class Task(QtCore.QObject):
             self._text = '%s %s %s' % (self._text[:3], date_string, self._text[4:])
         else:
             self._text = '%s %s' % (date_string, self._text)
+
+    def addDefaultPriority(self):
+        if re.match(r'^\([A-Z]\)', self._text) == None:
+            self._text = '(%s) %s' % (self._settings.value("Preferences/default_priority"), self._text)
 
     def _reset(self):
         self.contexts = []

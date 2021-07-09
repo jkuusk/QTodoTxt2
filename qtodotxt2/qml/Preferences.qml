@@ -11,6 +11,7 @@ Dialog {
         property alias auto_reload: autoReloadCB.checked
         property alias singleton: singletonCB.checked
         property alias lowest_priority: lowestPriorityField.text
+        property alias default_priority: defaultPriorityField.text
         property alias add_creation_date: creationDateCB.checked
         property alias match_only_beginnings_of_words_when_filtering: matchOnlyBeginningsOfWordsWhenFilteringCB.checked
     }
@@ -47,6 +48,14 @@ Dialog {
                 TextField { 
                     id: lowestPriorityField; 
                     text: "D"; 
+                    inputMask: "A" 
+                }
+            }
+            Row { 
+                Label {text: "Default task priority:"}
+                TextField { 
+                    id: defaultPriorityField; 
+                    text: ""; 
                     inputMask: "A" 
                 }
             }
