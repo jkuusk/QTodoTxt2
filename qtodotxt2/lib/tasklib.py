@@ -88,6 +88,8 @@ class Task(QtCore.QObject):
                 self._text = match.group(2)
 
     def addCreationDate(self):
+        # remove old creation date if it exists
+        self._removeCreationDate()
         date_string = date.today().strftime('%Y-%m-%d')
         if re.match(r'^\([A-Z]\)', self._text):
             self._text = '%s %s %s' % (self._text[:3], date_string, self._text[4:])
