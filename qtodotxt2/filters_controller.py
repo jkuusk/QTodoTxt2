@@ -1,7 +1,7 @@
 from PyQt5 import QtCore
 from PyQt5 import QtGui
 from qtodotxt2.lib.filters import ContextFilter, CompleteTasksFilter, DueFilter, DueOverdueFilter, DueThisMonthFilter, \
-    DueThisWeekFilter, DueTodayFilter, DueTomorrowFilter, HasContextsFilter, HasDueDateFilter, HasProjectsFilter, \
+    DueThisWeekFilter, DueTodayFilter, DueTomorrowFilter, DueNextWeekFilter, DueNextMonthFilter, HasContextsFilter, HasDueDateFilter, HasProjectsFilter, \
     ProjectFilter, UncategorizedTasksFilter, AllTasksFilter, PriorityFilter, HasPriorityFilter
 from qtodotxt2.lib.filters import SimpleTextFilter, FutureFilter, IncompleteTasksFilter, VisibleFilter
 
@@ -83,6 +83,8 @@ class FiltersModel(QtGui.QStandardItemModel):
         self._filterIconByFilterType[DueTomorrowFilter] = 'qtodotxt-filter-due-tomorrow'
         self._filterIconByFilterType[DueThisWeekFilter] = 'qtodotxt-filter-due-week'
         self._filterIconByFilterType[DueThisMonthFilter] = 'qtodotxt-filter-due-month'
+        self._filterIconByFilterType[DueNextWeekFilter] = 'qtodotxt-filter-due-nextweek'
+        self._filterIconByFilterType[DueNextMonthFilter] = 'qtodotxt-filter-due-nextmonth'
         self._filterIconByFilterType[DueOverdueFilter] = 'qtodotxt-filter-due-overdue'
         self._filterIconByFilterType[PriorityFilter] = 'qtodotxt-filter-complete'
 

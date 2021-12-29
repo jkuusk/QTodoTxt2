@@ -5,7 +5,7 @@ from datetime import date, timedelta
 from qtodotxt2.lib import tasklib
 from qtodotxt2.lib.file import File
 from qtodotxt2.lib.filters import IncompleteTasksFilter, ContextFilter, ProjectFilter, DueThisMonthFilter, \
-    DueThisWeekFilter, DueTodayFilter, DueOverdueFilter
+    DueThisWeekFilter, DueNextWeekFilter, DueNextMonthFilter, DueTodayFilter, DueOverdueFilter
 from qtodotxt2.main_controller import MainController
 
 

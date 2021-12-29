@@ -47,6 +47,13 @@ class BaseFilter(object):
             return self.text == other.text
         return False
 
+    ## https://stackoverflow.com/questions/6558535/find-the-date-for-the-first-monday-after-a-given-date
+    def next_weekday(d, weekday):
+        days_ahead = weekday - d.weekday()
+        if days_ahead <= 0: # Target day already happened this week
+            days_ahead += 7
+        return d + timedelta(days=days_ahead)
+
 
 class AllTasksFilter(BaseFilter):
     """
@@ -187,7 +194,7 @@ class DueThisWeekFilter(BaseFilter):
         else:
             due_date = task.due
             today = datetime.combine(date.today(), datetime.min.time())
-            return today <= due_date <= today + timedelta((6 - today.weekday()) % 7)
+            return today <= due_date <= BaseFilter.next_weekday(today, 6)
 
 
 class DueThisMonthFilter(BaseFilter):
@@ -210,6 +217,51 @@ class DueThisMonthFilter(BaseFilter):
             else:
                 last_day_of_month = today.replace(month=today.month + 1, day=1) - timedelta(days=1)
             return today <= due_date <= last_day_of_month
+
+
+class DueNextWeekFilter(BaseFilter):
+    """
+    Task list filter allowing only incomplete tasks that are due next week.
+
+    """
+
+    def __init__(self):
+        BaseFilter.__init__(self, "Next week")
+
+    def isMatch(self, task):
+        if not task.due:
+            return False
+        else:
+            due_date = task.due
+            today = datetime.combine(date.today(), datetime.min.time())
+            next_monday = BaseFilter.next_weekday(today, 0)
+            next_sunday = next_monday + timedelta(days=6)
+            return next_monday <= due_date <= next_sunday
+
+
+class DueNextMonthFilter(BaseFilter):
+    """
+    Task list filter allowing only incomplete tasks that are due next week.
+
+    """
+
+    def __init__(self):
+        BaseFilter.__init__(self, "Next month")
+
+    def isMatch(self, task):
+        if not task.due:
+            return False
+        else:
+            due_date = task.due
+            today = datetime.combine(date.today(), datetime.min.time())
+            if today.month == 12:
+                next_month_first = datetime(year=today.year+1, month=1, day=1)
+                next_month_last = datetime(year=today.year+1, month=1, day=31)
+            else:
+                next_month_first = today.replace(month = (today.month + 1) % 12, day=1)
+                ## https://stackoverflow.com/questions/42950/how-to-get-the-last-day-of-the-month
+                next_month_last = (next_month_first + timedelta(days=32)).replace(day=1) - timedelta(days=1)
+            return next_month_first <= due_date <= next_month_last
 
 
 class DueOverdueFilter(BaseFilter):

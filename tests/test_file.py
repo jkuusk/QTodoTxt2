@@ -6,7 +6,7 @@ from sys import version
 
 from qtodotxt2.lib.file import File
 from qtodotxt2.lib.tasklib import Task
-from qtodotxt2.lib.filters import DueTodayFilter, DueTomorrowFilter, DueThisWeekFilter, DueThisMonthFilter, DueOverdueFilter
+from qtodotxt2.lib.filters import DueTodayFilter, DueTomorrowFilter, DueThisWeekFilter, DueThisMonthFilter, DueNextWeekFilter, DueNextMonthFilter, DueOverdueFilter
 
 
 PYTHON_VERSION = version[:3]

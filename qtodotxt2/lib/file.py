@@ -3,7 +3,7 @@ import os
 
 from PyQt5 import QtCore
 
-from qtodotxt2.lib.filters import DueTodayFilter, DueTomorrowFilter, DueThisWeekFilter, DueThisMonthFilter, DueOverdueFilter
+from qtodotxt2.lib.filters import DueTodayFilter, DueTomorrowFilter, DueThisWeekFilter, DueThisMonthFilter, DueNextWeekFilter, DueNextMonthFilter, DueOverdueFilter
 from qtodotxt2.lib.tasklib import Task
 
 logger = logging.getLogger(__name__)
@@ -124,7 +124,7 @@ class File(QtCore.QObject):
 
     def getAllDueRanges(self):
         dueRanges = dict()
-        filters = [DueTodayFilter(), DueTomorrowFilter(), DueThisWeekFilter(), DueThisMonthFilter(), DueOverdueFilter()]
+        filters = [DueTodayFilter(), DueTomorrowFilter(), DueThisWeekFilter(), DueThisMonthFilter(), DueNextWeekFilter(), DueNextMonthFilter(), DueOverdueFilter()]
         for task in self.tasks:
             idx = 1 if task.is_complete else 0
             for flt in filters:

@@ -48,6 +48,8 @@ QtObject {
         'qtodotxt-filter-due-today': 'FilterDueToday.png',
         'qtodotxt-filter-due-tomorrow': 'FilterDueTomorrow.png',
         'qtodotxt-filter-due-week': 'FilterDueWeek.png',
+        'qtodotxt-filter-due-nextweek': 'FilterDueWeek.png',
+        'qtodotxt-filter-due-nextmonth': 'FilterDueMonth.png',
         'qtodotxt-filter-due-month': 'FilterDueMonth.png',
         'qtodotxt-filter-due-overdue': 'FilterDueOverdue.png'
     }
