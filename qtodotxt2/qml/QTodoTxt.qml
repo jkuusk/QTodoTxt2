@@ -150,7 +150,10 @@ ApplicationWindow {
 					}
                 }
 
-				ToolButton { action: actions.clearSearch}
+				ToolButton { 
+	                visible: actions.showSearchAction.checked
+					action: actions.clearSearch
+				}
 
                 CompletionPopup { }
             }
