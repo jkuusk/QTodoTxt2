@@ -16,6 +16,7 @@ Dialog {
         property alias match_only_beginnings_of_words_when_filtering: matchOnlyBeginningsOfWordsWhenFilteringCB.checked
     }
     GroupBox {
+	title: qsTr("Preferences")
         Column {
             spacing: 10
             CheckBox { 
@@ -55,8 +56,7 @@ Dialog {
                 Label {text: "Default task priority:"}
                 TextField { 
                     id: defaultPriorityField; 
-                    text: ""; 
-                    inputMask: "A" 
+                    inputMask: "a" 
                 }
             }
         }
