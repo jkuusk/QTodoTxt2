@@ -194,7 +194,7 @@ class DueThisWeekFilter(BaseFilter):
         else:
             due_date = task.due
             today = datetime.combine(date.today(), datetime.min.time())
-            return today <= due_date <= BaseFilter.next_weekday(today, 6)
+            return today <= due_date <= today + timedelta((6 - today.weekday()) % 7)
 
 
 class DueThisMonthFilter(BaseFilter):
