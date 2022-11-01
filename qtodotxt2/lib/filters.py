@@ -258,7 +258,7 @@ class DueNextMonthFilter(BaseFilter):
                 next_month_first = datetime(year=today.year+1, month=1, day=1)
                 next_month_last = datetime(year=today.year+1, month=1, day=31)
             else:
-                next_month_first = today.replace(month = (today.month + 1) % 12, day=1)
+                next_month_first = today.replace(month = today.month + 1, day=1)
                 ## https://stackoverflow.com/questions/42950/how-to-get-the-last-day-of-the-month
                 next_month_last = (next_month_first + timedelta(days=32)).replace(day=1) - timedelta(days=1)
             return next_month_first <= due_date <= next_month_last
